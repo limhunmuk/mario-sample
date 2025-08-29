@@ -1,0 +1,13 @@
+package com.radait.mariosample;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MarioSampleApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MarioSampleApplication.class, args);
+    }
+
+}
