@@ -1,6 +1,6 @@
 package com.radait.mariosample.web.api.member.entity;
 
-import com.radait.mariosample.web.api.common.enums.entity.BaseEntity;
+import com.radait.mariosample.web.api.common.entity.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.radait.mariosample.web.api.common.enums.entity;
+package com.radait.mariosample.web.api.common.entity;
 
 import com.radait.mariosample.web.config.IpHolder;
 import lombok.AccessLevel;

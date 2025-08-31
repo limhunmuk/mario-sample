@@ -22,6 +22,7 @@ public class MyBatisConfig {
 
         factory.setTypeAliasesPackage(
                 "com.radait.mariosample.web.api.member.entity,"
+                + "com.radait.mariosample.web.api.member.dto"
                 // 하위추가 필요
         );
 

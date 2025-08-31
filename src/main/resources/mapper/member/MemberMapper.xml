@@ -9,7 +9,46 @@
         <result column="nick_nm" property="nickNm"/>
     </resultMap>
 
-    <select id="findById" resultMap="MemberMap">
+    <select id="findMemberAll" parameterType="MemberSearchDto" resultMap="MemberMap">
+        SELECT
+            member_id as member_id
+             , login_id
+             , mem_nm
+             , nick_nm
+        FROM member
+        <where>
+            <if test="cond.id != null">
+                AND m.member_id = #{cond.id}
+            </if>
+            <if test="cond.loginId != null and cond.loginId != ''">
+                AND m.login_id = #{cond.loginId}
+            </if>
+            <if test="cond.nameLike != null">
+                AND m.mem_nm LIKE #{cond.nameLike}
+            </if>
+        </where>
+        ORDER BY ${cond.safeSortColumn} ${cond.safeDirection}
+        LIMIT #{cond.sizeSafe} OFFSET #{cond.offset}
+    </select>
+
+    <!-- 총 건수 (동일 조건) -->
+    <select id="countMemberAll" parameterType="MemberSearchDto" resultType="long">
+        SELECT COUNT(*)
+        FROM member m
+        <where>
+            <if test="cond.id != null">
+                AND m.member_id = #{cond.id}
+            </if>
+            <if test="cond.loginId != null and cond.loginId != ''">
+                AND m.login_id = #{cond.loginId}
+            </if>
+            <if test="cond.nameLike != null">
+                AND m.mem_nm LIKE #{cond.nameLike}
+            </if>
+        </where>
+    </select>
+
+    <select id="findMemberById"  resultMap="MemberMap">
         SELECT
             member_id as member_id
              , login_id
@@ -17,9 +56,10 @@
              , nick_nm
         FROM member
         WHERE member_id = #{id}
+
     </select>
 
-    <insert id="insert"
+    <insert id="insertMember"
             parameterType="Member"
             useGeneratedKeys="true"
             keyProperty="id">
