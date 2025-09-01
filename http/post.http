@@ -1,0 +1,12 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+###
+GET http://localhost:8080/api/post?page=1&size=10
+
+###
+GET http://localhost:8080/api/post/1
+Content-Type: application/json
+
+

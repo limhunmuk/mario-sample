@@ -1,0 +1,43 @@
+### 회원가입
+
+POST http://localhost:8080/api/signup
+Content-Type: application/json
+
+{
+  "name": "임훈묵",
+  "nickName": "임씨다",
+  "age": "33",
+  "loginId": "limhunmuk@gmail.com",
+  "password": "1234"
+}
+
+
+### 로그인
+# @no-redirect
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "loginId": "limhunmuk@gmail.com",
+  "password": "1234"
+}
+
+
+
+### 사용자 페이지
+
+GET http://localhost:8080/api/member/7
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+
+
+### 관리자 페이지
+
+GET http://localhost:8080/admin
+
+Authorization: Bearer {{accessToken}}
+
+### 메인 페이지
+
+GET http://localhost:8080/api/post

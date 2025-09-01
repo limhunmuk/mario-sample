@@ -1,0 +1,29 @@
+
+###
+GET http://localhost:8080/api/notice?page=0&size=10
+
+Authorization: Bearer {{accessToken}}
+
+
+###
+POST http://localhost:8080/api/notice
+Content-Type: application/json
+
+{
+  "title": "공지사항 제목 작성",
+  "content": "공지사항 내용 작성"
+}
+
+###
+PUT http://localhost:8080/api/notice/8
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "title": "공지사항 제목 수정 22222",
+  "content": "공지사항 내용 수정 22222"
+}
+
+###
+DELETE http://localhost:8080/api/notice/8
+content-type: application/json

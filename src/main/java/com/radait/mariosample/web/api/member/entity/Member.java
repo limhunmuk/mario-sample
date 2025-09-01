@@ -1,6 +1,8 @@
 package com.radait.mariosample.web.api.member.entity;
 
 import com.radait.mariosample.web.api.common.entity.BaseEntity;
+import com.radait.mariosample.web.api.member.dto.MemberFormDto;
+import com.radait.mariosample.web.api.common.entity.IpHolder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,31 +28,17 @@ public class Member extends BaseEntity {
     private String addr;
     private String addrDtl;
 
-    public Member(String loginId, String password, String memNm, String nickNm, String memberType,
-                  LocalDate joinDateTime, String phoneNumber, String address, String addressDetail, String regId, String regIp) {
+    public void updateMember(MemberFormDto dto) {
 
-        this.loginId = loginId;
-        this.password = password;
-        this.memNm = memNm;
-        this.nickNm = nickNm;
-        this.memType = memberType;
-        this.joinDt = joinDateTime;
-        this.phoneNo = phoneNumber;
-        this.addr = address;
-        this.addrDtl = addressDetail;
-        this.regId = regId;
-        this.regIp = regIp;
-    }
+        if (dto.getMemNm() != null) this.memNm = dto.getMemNm();
+        if (dto.getNickNm() != null) this.nickNm = dto.getNickNm();
+        if (dto.getMemType() != null) this.memType = dto.getMemType();
+        if (dto.getPhoneNo() != null) this.phoneNo = dto.getPhoneNo();
+        if (dto.getAddr() != null) this.addr = dto.getAddr();
+        if (dto.getAddrDtl() != null) this.addrDtl = dto.getAddrDtl();
 
-    public void updateMember(String nickNm,
-                           String phoneNumber, String address, String addressDetail, String modId, String modIp) {
-
-        this.nickNm = nickNm;
-        this.phoneNo = phoneNumber;
-        this.addr = address;
-        this.addrDtl = addressDetail;
-        this.modId = modId;
+        this.modId = dto.getLoginId();
+        this.modIp = IpHolder.getIp();
         this.modDt = LocalDateTime.now();
-        this.modIp = modIp;
     }
 }

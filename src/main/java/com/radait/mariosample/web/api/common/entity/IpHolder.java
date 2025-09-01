@@ -1,4 +1,4 @@
-package com.radait.mariosample.web.config;
+package com.radait.mariosample.web.api.common.entity;
 
 public class IpHolder {
 
