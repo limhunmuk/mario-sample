@@ -2,7 +2,6 @@ package com.radait.mariosample.web.api.member.entity;
 
 import com.radait.mariosample.web.api.common.entity.BaseEntity;
 import com.radait.mariosample.web.api.member.dto.MemberFormDto;
-import com.radait.mariosample.web.api.common.entity.IpHolder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +27,7 @@ public class Member extends BaseEntity {
     private String addr;
     private String addrDtl;
 
-    public void updateMember(MemberFormDto dto) {
+    public void updateForm(MemberFormDto dto, String ipAddress) {
 
         if (dto.getMemNm() != null) this.memNm = dto.getMemNm();
         if (dto.getNickNm() != null) this.nickNm = dto.getNickNm();
@@ -38,7 +37,7 @@ public class Member extends BaseEntity {
         if (dto.getAddrDtl() != null) this.addrDtl = dto.getAddrDtl();
 
         this.modId = dto.getLoginId();
-        this.modIp = IpHolder.getIp();
+        this.modIp = ipAddress;
         this.modDt = LocalDateTime.now();
     }
 }

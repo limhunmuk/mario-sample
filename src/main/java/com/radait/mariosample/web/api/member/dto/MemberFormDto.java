@@ -12,8 +12,12 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class MemberFormDto {
 
-    private Long memberId;
+    private String memberId;
+
+    //@NotBlank(message = "로그인 아이디는 필수입니다.")
     private String loginId;
+
+    //@NotBlank(message = "비밀번호는 필수 입니다")
     private String password;
     private String confirmPassword;
 
@@ -26,14 +30,12 @@ public class MemberFormDto {
     private String addr;
     private String addrDtl;
 
-
     /**
      * 엔티티 변환
      * @return
      */
     public Member toEntity(String ipAddress) {
         return Member.builder()
-                .memberId(memberId)
                 .loginId(loginId)
                 .memNm(memNm)
                 .password(password)

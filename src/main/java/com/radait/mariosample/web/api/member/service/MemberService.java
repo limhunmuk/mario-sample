@@ -26,7 +26,8 @@ public class MemberService {
      */
     public PageResponse<MemberDetailDto> selectMemberList(MemberSearchDto condition) {
 
-        List<MemberDetailDto> result = memberMapper.selectMemberList(condition).stream()
+        List<MemberDetailDto> result = memberMapper.selectMemberList(condition)
+                .stream()
                 .map(MemberDetailDto::of)
                 .toList();
 
@@ -64,15 +65,16 @@ public class MemberService {
      */
     public int updateMember(long id, MemberFormDto formDto) {
 
-        Member oldMember = memberMapper.selectMemberById(id);
+        Member member = memberMapper.selectMemberById(id);
 
-        Boolean validate = formDto.validate(oldMember, formDto);
+        // 유효성 검사 -> 비즈니스단
+        Boolean validate = formDto.validate(member, formDto);
         if(validate) {
             throw new InvalidRequest();
         }
 
-        oldMember.updateMember(formDto);
-        return memberMapper.updateMember(oldMember);
+        member.updateForm(formDto, IpHolder.getIp());
+        return memberMapper.updateMember(member);
     }
 
     /**
@@ -81,6 +83,7 @@ public class MemberService {
      * @return
      */
     public int deleteMemberById(long id) {
+
         Member member = memberMapper.selectMemberById(id);
         if(member == null) {
             throw new InvalidRequest();
