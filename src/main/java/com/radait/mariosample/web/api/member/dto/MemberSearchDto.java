@@ -10,15 +10,15 @@ public class MemberSearchDto {
 
     private Long id;
     private String loginId;
-    private String name;
+    private String username;
+    private String nickNm;
+    private String memNm;
 
     // 페이징/정렬 기본값
     private Integer page = 0;     // 0-based
     private Integer size = 10;    // 페이지 크기
     private String sort = "reg_dt";      // DB 컬럼 기준으로 지정
     private String direction = "desc";   // asc|desc
-
-
 
     public Pageable toPageable() {
         return PageRequest.of(page, size, Sort.by(sort));
@@ -65,6 +65,7 @@ public class MemberSearchDto {
 
     /** LIKE 검색용 파라미터 (DB 독립적으로 쓰기 좋음) */
     public String getNameLike() {
-        return (name == null || name.isBlank()) ? null : "%" + name + "%";
+        return (memNm == null || memNm.isBlank()) ? null : "%" + memNm + "%";
     }
+
 }

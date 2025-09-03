@@ -7,6 +7,7 @@
         <result column="login_id" property="loginId"/>
         <result column="mem_nm" property="memNm"/>
         <result column="nick_nm" property="nickNm"/>
+        <result column="password" property="password"/>
     </resultMap>
 
     <select id="selectMemberList" parameterType="MemberSearchDto" resultMap="MemberMap">
@@ -50,13 +51,26 @@
 
     <select id="selectMemberById"  resultMap="MemberMap">
         SELECT
-            member_id as member_id
+            member_id
              , login_id
              , mem_nm
              , nick_nm
         FROM member
         WHERE member_id = #{id}
 
+    </select>
+
+    <select id="selectMemberLogin"  resultMap="MemberMap">
+        SELECT
+            member_id,
+            login_id,
+            mem_nm,
+            nick_nm,
+            password
+        FROM member
+        WHERE 1=1
+        AND login_id = #{username}
+        AND del_yn = 'N'
     </select>
 
     <insert id="insertMember"

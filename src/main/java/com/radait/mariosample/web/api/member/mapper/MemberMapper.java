@@ -14,9 +14,9 @@ public interface MemberMapper {
     Long countMemberList(@Param("cond") MemberSearchDto condition);
 
     Member selectMemberById(@Param("id") Long id);
+    Member selectMemberLogin(@Param("username") String username);
+
     int insertMember(Member member);
     int updateMember(Member member);
-    int deleteMemberById(@Param("id") Long id
-            , @Param("modId") String modId
-            , @Param("modIp") String modIp);
+    int deleteMemberById(@Param("id") Long id, @Param("modId") String modId, @Param("modIp") String modIp);
 }

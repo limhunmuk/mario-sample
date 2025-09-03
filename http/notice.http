@@ -1,3 +1,4 @@
+### @env=local
 
 ###
 GET http://localhost:8080/api/notice?page=0&size=10

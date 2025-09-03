@@ -1,5 +1,11 @@
+### @env=local
+
 ###
 GET http://localhost:8080/api/members?page=0&size=10
+Content-Type: application/json
+
+###
+GET http://localhost:8080/api/members/6
 Content-Type: application/json
 
 ###
@@ -20,7 +26,7 @@ Content-Type: application/json
 ###
 PUT http://localhost:8080/api/members/6
 Content-Type: application/json
-#Authorization: Bearer {{accessToken}}
+Authorization: Bearer {{accessToken}}
 
 {
   "nickNm": "도우너",
@@ -31,7 +37,7 @@ Content-Type: application/json
 ###
 DELETE http://localhost:8080/api/members/4
 Content-Type: application/json
-#Authorization: Bearer {{accessToken}}
+Authorization: Bearer {{accessToken}}
 
 {
 }
