@@ -10,8 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -34,14 +35,16 @@ public class SecurityConfig {
     private final JwtTokenUtil jwtTokenUtil;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                                    AuthenticationManager authenticationManager
+                                                   ) throws Exception {
 
         // JwtAuthorizationFilter는 모든 요청에서 토큰을 검증하기 위해 추가됩니다.
         JwtAuthorizationFilter jwtAuthorizationFilter = new JwtAuthorizationFilter(jwtTokenUtil);
 
         // 로그인 필터는 JwtAuthenticationFilter에서 처리합니다.
         JwtAuthenticationFilter jwtAuthenticationFilter =
-                new JwtAuthenticationFilter(authenticationManager(), jwtTokenUtil, userRepository, objectMapper,"/api/login");
+                new JwtAuthenticationFilter(authenticationManager, jwtTokenUtil, userRepository, objectMapper,"/api/login");
 
 //        jwtAuthenticationFilter.setAuthenticationSuccessHandler(new LoginSuccessHandler(userRepository));
 
@@ -80,11 +83,27 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return new ProviderManager(provider);
+    public AuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder);
+        return provider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter(
+            AuthenticationManager authenticationManager,
+            JwtTokenUtil jwtTokenUtil,
+            MemberMapper userRepository,
+            ObjectMapper objectMapper
+    ) {
+        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenUtil, userRepository, objectMapper, "/api/login");
+        jwtAuthenticationFilter.setAuthenticationManager(authenticationManager);
+        return jwtAuthenticationFilter;
     }
 
 
