@@ -4,6 +4,7 @@ import com.radait.mariosample.web.api.member.entity.Member;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class MemberDetailDto {
@@ -17,6 +18,7 @@ public class MemberDetailDto {
     private String phoneNo;
     private String addr;
     private String addrDtl;
+    private LocalDateTime regDt;
 
 
     public static MemberDetailDto of(Member member) {
@@ -27,11 +29,11 @@ public class MemberDetailDto {
         dto.setMemNm(member.getMemNm());
         dto.setNickNm(member.getNickNm());
         dto.setMemType(member.getMemType());
-        dto.setJoinDt(member.getJoinDt() != null ? member.getJoinDt() : null);
+        dto.setJoinDt(member.getJoinDt());
         dto.setPhoneNo(member.getPhoneNo());
         dto.setAddr(member.getAddr());
         dto.setAddrDtl(member.getAddrDtl());
-
+        dto.setRegDt(member.getRegDt());
         return dto;
     }
 }

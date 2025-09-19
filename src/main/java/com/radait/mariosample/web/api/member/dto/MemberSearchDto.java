@@ -13,6 +13,10 @@ public class MemberSearchDto {
     private String username;
     private String nickNm;
     private String memNm;
+    private String memType;
+
+    private String searchType;  // 검색 타입 (id, name, loginId)
+    private String searchText;  // 검색어
 
     // 페이징/정렬 기본값
     private Integer page = 0;     // 0-based

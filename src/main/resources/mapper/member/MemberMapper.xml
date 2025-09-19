@@ -8,6 +8,15 @@
         <result column="mem_nm" property="memNm"/>
         <result column="nick_nm" property="nickNm"/>
         <result column="password" property="password"/>
+
+        <result column="join_dt" property="joinDt"/>
+        <result column="mem_type" property="memType"/>
+        <result column="phone_no" property="phoneNo"/>
+        <result column="addr" property="addr"/>
+        <result column="addr_detail" property="addrDtl"/>
+        <result column="reg_dt" property="regDt"/>
+        <result column="reg_id" property="regId"/>
+        <result column="reg_ip" property="regIp"/>
     </resultMap>
 
     <select id="selectMemberList" parameterType="MemberSearchDto" resultMap="MemberMap">
@@ -52,12 +61,20 @@
     <select id="selectMemberById"  resultMap="MemberMap">
         SELECT
             member_id
-             , login_id
-             , mem_nm
-             , nick_nm
+            , login_id
+            , mem_nm
+            , nick_nm
+            , join_dt
+            , mem_type
+            , phone_no
+            , addr
+            , addr_detail
+            , reg_dt
+            , reg_id
+            , reg_ip
         FROM member
         WHERE member_id = #{id}
-
+        AND del_yn = 'N'
     </select>
 
     <select id="selectMemberLogin"  resultMap="MemberMap">

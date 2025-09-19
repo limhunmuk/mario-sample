@@ -54,10 +54,13 @@ public class MemberService {
     /**
      * 화원등록
      */
-    public int insertMember(MemberFormDto formDto) {
+    public MemberDetailDto insertMember(MemberFormDto formDto) {
 
         Member entity = formDto.toEntity(IpHolder.getIp());
-        return memberMapper.insertMember(entity);
+        memberMapper.insertMember(entity);
+        System.out.println("entity.getMemberId() = " + entity.getMemberId());
+
+        return MemberDetailDto.of(memberMapper.selectMemberById(entity.getMemberId()));
     }
 
     /**

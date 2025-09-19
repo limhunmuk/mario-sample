@@ -56,7 +56,8 @@ public class SecurityConfig {
                                 //auth.requestMatchers("/api/login").permitAll()
                                 //.requestMatchers("/api/signup").authenticated()
                                 //auth.anyRequest().permitAll() // 모든 요청에 대해 인증을 요구하지 않음
-                                .requestMatchers("/", "/api/login", "/api/signup").permitAll() // 로그인 요청은 인증 필요 없음
+                                .requestMatchers("/", "/api/login", "/api/logout", "/api/main", "/docs/**").permitAll() // 로그인 요청은 인증 필요 없음
+                                .requestMatchers((HttpMethod.POST), "/api/members").permitAll()
                                 .requestMatchers((HttpMethod.GET), "/api/post/**", "/api/notice/**").permitAll() // 게시글 조회는 인증 필요 없음
                                 //.requestMatchers((HttpMethod.POST), "/api/post/**", "/api/notice/**").authenticated() // 게시글 작성은 인증 필요
                                 //.requestMatchers((HttpMethod.PUT), "/api/post/**", "/api/notice/**").authenticated() // 게시글 수정은 인증 필요
@@ -118,7 +119,7 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().requestMatchers(
                 // 원하는 URL들
-                "swagger-ui.html",      // Swagger 사용 시
+                //"swagger-ui.html",      // Swagger 사용 시
                 "/index.html",          // Front-end에서 빌드된 static 파일
                 "/favicon.ico",         // 아이콘 파일
                 "/css/**",              // CSS 파일
@@ -126,7 +127,7 @@ public class SecurityConfig {
                 "/img/**",              // 이미지 파일
                 "/js/**",                // JavaScript 파일
                 "/assets/**",           // 기타 자원 파일
-                "/docs/**"
+                "/docs/**"              // spring rest docs
 
         );
     }

@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
@@ -44,10 +46,13 @@ public class MemberController {
      * 회원 등록
      */
     @PostMapping("/api/members")
-    public ResponseEntity<String> insertMember(@RequestBody MemberFormDto formDto) {
+    public ResponseEntity<MemberDetailDto> insertMember(@RequestBody MemberFormDto formDto) {
 
-        int rtnCnt = memberService.insertMember(formDto);
-        return ResponseEntity.ok(rtnCnt +" 건이 회원이 성공적으로 등록되었습니다");
+        MemberDetailDto detailDto = memberService.insertMember(formDto);
+        URI location = URI.create("/api/members/" + detailDto.getMemberId());
+        return ResponseEntity
+                .created(location)
+                .body(detailDto);
     }
 
     /**

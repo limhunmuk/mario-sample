@@ -1,0 +1,16 @@
+= API Guide
+:toc: left
+:sectnums:
+:snippets: {snippets}
+
+
+== 회원 API
+
+=== 회원 생성 (200 Created)
+
+요청/응답 예시와 필드 설명입니다.
+
+include::{snippets}/member-create/http-request.adoc[]
+include::{snippets}/member-create/request-fields.adoc[]
+include::{snippets}/member-create/http-response.adoc[]
+include::{snippets}/member-create/response-fields.adoc[]

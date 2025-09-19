@@ -62,11 +62,12 @@
 
     <!-- log4jdbc -->
     <logger name="jdbc.sqlonly" level="OFF" />
-    <logger name="jdbc.sqltiming" level="DEBUG" />
+    <logger name="jdbc.sqltiming" level="OFF" />
     <logger name="jdbc.audit" level="OFF" />
     <logger name="jdbc.resultset" level="OFF" />
-    <logger name="jdbc.resultsettable" level="DEBUG" />
-    <logger name="jdbc.connection" level="WARN" />
+    <logger name="jdbc.resultsettable" level="INFO" />
+    <logger name="jdbc.connection" level="OFF" />
+    <logger name="log4jdbc.log4j2" level="WARN" />
 
     <!-- Spring Profile 에 따라 로그 출력 정의 -->
     <springProfile name="local">
@@ -83,7 +84,6 @@
         </root>
     </springProfile>
     <springProfile name="prod">
-        <logger name="jdbc.resultsettable" level="DEBUG" />
         <root level="INFO">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="FILE" />
