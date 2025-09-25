@@ -1,10 +1,10 @@
 package com.radait.mariosample.web.exception;
 
-public class InvalidSigninInformation extends CustomRuntimeException {
+public class InvalidSignInInformation extends CustomRuntimeException {
 
     private static final String MESSAGE = "아이디/비밀번호가 올바르지 않습니다.";
 
-    public InvalidSigninInformation() {
+    public InvalidSignInInformation() {
         super(MESSAGE);
     }
 

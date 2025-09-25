@@ -7,9 +7,19 @@
         <result column="login_id" property="loginId"/>
         <result column="mem_nm" property="memNm"/>
         <result column="nick_nm" property="nickNm"/>
+        <result column="password" property="password"/>
+
+        <result column="join_dt" property="joinDt"/>
+        <result column="mem_type" property="memType"/>
+        <result column="phone_no" property="phoneNo"/>
+        <result column="addr" property="addr"/>
+        <result column="addr_detail" property="addrDtl"/>
+        <result column="reg_dt" property="regDt"/>
+        <result column="reg_id" property="regId"/>
+        <result column="reg_ip" property="regIp"/>
     </resultMap>
 
-    <select id="findMemberAll" parameterType="MemberSearchDto" resultMap="MemberMap">
+    <select id="selectMemberList" parameterType="MemberSearchDto" resultMap="MemberMap">
         SELECT
             member_id as member_id
              , login_id
@@ -32,7 +42,7 @@
     </select>
 
     <!-- 총 건수 (동일 조건) -->
-    <select id="countMemberAll" parameterType="MemberSearchDto" resultType="long">
+    <select id="countMemberList" parameterType="MemberSearchDto" resultType="long">
         SELECT COUNT(*)
         FROM member m
         <where>
@@ -48,23 +58,104 @@
         </where>
     </select>
 
-    <select id="findMemberById"  resultMap="MemberMap">
+    <select id="selectMemberById"  resultMap="MemberMap">
         SELECT
-            member_id as member_id
-             , login_id
-             , mem_nm
-             , nick_nm
+            member_id
+            , login_id
+            , mem_nm
+            , nick_nm
+            , join_dt
+            , mem_type
+            , phone_no
+            , addr
+            , addr_detail
+            , reg_dt
+            , reg_id
+            , reg_ip
         FROM member
         WHERE member_id = #{id}
+        AND del_yn = 'N'
+    </select>
 
+    <select id="selectMemberLogin"  resultMap="MemberMap">
+        SELECT
+            member_id,
+            login_id,
+            mem_nm,
+            nick_nm,
+            password
+        FROM member
+        WHERE 1=1
+        AND login_id = #{username}
+        AND del_yn = 'N'
     </select>
 
     <insert id="insertMember"
             parameterType="Member"
             useGeneratedKeys="true"
-            keyProperty="id">
-        INSERT INTO member(login_id, mem_nm, nick_nm)
-        VALUES (#{loginId}, #{name}, #{nickName})
+            keyProperty="memberId"
+    >
+        INSERT INTO member(
+                   login_id
+                  , password
+                  , mem_nm
+                  , nick_nm
+                  , mem_type
+                  , phone_no
+                  , addr
+                  , addr_detail
+                  , join_dt
+                  , del_Yn
+                  , reg_id
+                  , reg_ip
+                  , reg_dt
+                  , mod_id
+                  , mod_ip
+                  , mod_dt
+        )
+        VALUES (
+                #{loginId}
+                , #{password}
+                , #{memNm}
+                , #{nickNm}
+                , #{memType}
+                , #{phoneNo}
+                , #{addr}
+                , #{addrDtl}
+                , #{joinDt}
+                , 'N'
+                , #{regId}
+                , #{regIp}
+                , now()
+                , #{modId}
+                , #{modIp}
+                , now()
+               )
     </insert>
+
+    <update id="updateMember" parameterType="Member">
+        UPDATE member
+        <set>
+            <if test="loginId != null">login_id = #{loginId},</if>
+            <if test="memNm   != null">mem_nm   = #{memNm},</if>
+            <if test="nickNm  != null">nick_nm  = #{nickNm},</if>
+            <if test="phoneNo != null">phone_no  = #{phoneNo},</if>
+            <if test="addr    != null">addr  = #{addr},</if>
+            <if test="addrDtl != null">addr_detail = #{addrDtl},</if>
+        </set>
+        , mod_id = #{modId}
+        , mod_ip = #{modIp}
+        , mod_dt = now()
+        WHERE member_id = #{memberId}
+    </update>
+
+    <update id="deleteMemberById" parameterType="Member">
+        UPDATE member
+        SET   del_yn = 'Y'
+            , mod_id = #{modId}
+            , mod_ip = #{modIp}
+            , mod_dt = now()
+        WHERE member_id = #{id}
+    </update>
 
 </mapper>

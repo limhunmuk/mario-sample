@@ -1,0 +1,46 @@
+### @env=local
+
+###
+GET http://localhost:8080/api/members?page=0&size=10
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+###
+GET http://localhost:8080/api/members/1
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+###
+POST http://localhost:8080/api/members
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "loginId": "ihm2119",
+  "password": "test1234",
+  "memNm": "홍길동",
+  "memType": "NO001",
+  "nickNm": "홍길닉넴",
+  "addr": "주소1",
+  "addrDtl": "주소상세1",
+  "phoneNo": "01029284196"
+}
+
+###
+PUT http://localhost:8080/api/members/6
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "nickNm": "도우너",
+  "addr": "주소 수정1",
+  "addrDetail": "주소 상세 수정1"
+}
+
+###
+DELETE http://localhost:8080/api/members/4
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+}

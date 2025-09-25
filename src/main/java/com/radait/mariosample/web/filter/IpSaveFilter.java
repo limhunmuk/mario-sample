@@ -1,6 +1,6 @@
 package com.radait.mariosample.web.filter;
 
-import com.radait.mariosample.web.config.IpHolder;
+import com.radait.mariosample.web.api.common.entity.IpHolder;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

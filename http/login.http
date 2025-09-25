@@ -1,0 +1,41 @@
+### @env=local
+
+### 회원가입
+
+POST {{host}}/api/signup
+Content-Type: application/json
+
+{
+  "name": "임훈묵",
+  "nickName": "임씨다",
+  "age": "33",
+  "loginId": "limhunmuk@gmail.com",
+  "password": "1234"
+}
+
+### 로그인
+
+POST {{host}}/api/login
+Content-Type: application/json
+
+{
+  "loginId": "limhunmuk@gmail.com",
+  "password": "1234"
+}
+
+> {%
+
+    // 전역 변수에 저장 (모든 HTTP 파일에서 사용 가능)
+    client.global.set("accessToken", response.body.accessToken);
+    client.global.set("refreshToken", response.body.refreshToken);
+
+    // 확인용 로그
+    client.log('============ accessToken set: ' + client.global.get("accessToken"));
+    client.log('============ refreshToken set: ' + client.global.get("refreshToken"));
+%}
+
+### 사용자 페이지
+
+GET {{host}}/api/members/1
+Accept: application/json
+Authorization: Bearer {{accessToken}}

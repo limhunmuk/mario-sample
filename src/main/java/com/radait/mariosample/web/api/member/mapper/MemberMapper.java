@@ -10,9 +10,13 @@ import java.util.List;
 @Mapper
 public interface MemberMapper {
 
-    List<Member> findMemberAll(@Param("cond") MemberSearchDto condition);
-    Long countMemberAll(@Param("cond") MemberSearchDto condition);
+    List<Member> selectMemberList(@Param("cond") MemberSearchDto condition);
+    Long countMemberList(@Param("cond") MemberSearchDto condition);
 
-    Member findMemberById(@Param("id") Long id);
+    Member selectMemberById(@Param("id") Long id);
+    Member selectMemberLogin(@Param("username") String username);
+
     int insertMember(Member member);
+    int updateMember(Member member);
+    int deleteMemberById(@Param("id") Long id, @Param("modId") String modId, @Param("modIp") String modIp);
 }
