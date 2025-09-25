@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.radait.mariosample.web.api.member.mapper.MemberMapper">
+<mapper namespace="com.rodait.mariosample.web.api.member.mapper.MemberMapper">
 
     <resultMap id="MemberMap" type="Member">
         <id column="member_id" property="memberId"/>
