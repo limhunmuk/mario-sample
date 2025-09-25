@@ -3,6 +3,9 @@ package com.rodait.mariosample;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author hunmuk
+ */
 @SpringBootApplication
 public class MarioSampleApplication {
 

@@ -11,7 +11,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.radait.mariosample.web.api", sqlSessionFactoryRef = "SqlSessionFactory")
+@MapperScan(basePackages = "com.rodait.mariosample.web.api", sqlSessionFactoryRef = "SqlSessionFactory")
 public class MyBatisConfig {
 
     @Bean(name = "SqlSessionFactory")
@@ -21,8 +21,8 @@ public class MyBatisConfig {
         factory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:/mapper/**/*.xml"));
 
         factory.setTypeAliasesPackage(
-                "com.radait.mariosample.web.api.member.entity,"
-                + "com.radait.mariosample.web.api.member.dto"
+                "com.rodait.mariosample.web.api.member.entity,"
+                + "com.rodait.mariosample.web.api.member.dto,"
                 // 하위추가 필요
         );
 
